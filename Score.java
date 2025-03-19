@@ -24,8 +24,8 @@ public class Score {
             }
             writer.close();
 
-        } catch (IOException e) { // used ioexception to catch any IO errors 
-            System.out.println("An error occurred");
+        } catch (IOException e) { // used ioexception to catch any IO errors relating to writing 
+            System.out.println("An error occurred writing the scoreboard");
             e.printStackTrace();
         }
     }
@@ -36,7 +36,7 @@ public class Score {
             BufferedReader reader = new BufferedReader(new FileReader("Scoreboard.txt")); 
             String line; // a string to store each line of the file
             while ((line = reader.readLine()) != null) { // read each line of the file
-                String[] parts = line.split(" ");
+                String[] parts = line.split(" "); //Splits the line into 2 parts. One before the space and one after the space
                 if (parts.length == 2) { // check if the line has 2 parts
                     String id = parts[0]; // get the id
                     int points = Integer.parseInt(parts[1]); // Get the points
@@ -44,8 +44,8 @@ public class Score {
                 }
             }
             reader.close();
-        } catch (IOException e) { // used ioexception to catch any IO errors
-            System.out.println("An error occurred");
+        } catch (IOException e) { // used ioexception to catch any IO errors related to reading
+            System.out.println("An error occurred reading the scoreboard");
             e.printStackTrace();
         }
         return scores;
@@ -54,7 +54,7 @@ public class Score {
     public static <K, V extends Comparable<? super V>> Map<K, V> sortMapByValueDescending(Map<K, V> map) { // sorts the map by value in descending order
         return map.entrySet()
           .stream()
-          .sorted(Map.Entry.<K, V>comparingByValue().reversed())
+          .sorted(Map.Entry.<K, V>comparingByValue().reversed()) //Sorts based on values in decending order
           .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
     }
 
